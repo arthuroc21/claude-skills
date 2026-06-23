@@ -1,0 +1,10 @@
+# Packaged skill artifacts (build outputs, not source)
+*.skill
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
