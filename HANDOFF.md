@@ -1,23 +1,23 @@
-# claude_skills — HANDOFF
+# claude-skills — HANDOFF
 
-**Last updated:** 2026-06-23 · **Phase:** **published** — repo live and public on GitHub; remaining items optional (`SessionStart` hook, local skill installs) · **Surface(s):** now developed in Claude Code (local clone in Google Drive); originally authored in claude.ai chat; skills target all four surfaces (Chat, Cowork, Code, Design)
+**Last updated:** 2026-06-23 · **Phase:** **published & wired** — repo live and public on GitHub; both skills installed locally; `SessionStart` handoff-reload hook installed · **Surface(s):** now developed in Claude Code (local clone in Google Drive); originally authored in claude.ai chat; skills target all four surfaces (Chat, Cowork, Code, Design)
 
 ## 1. Summary / North Star
 
-A public GitHub repo holding two complementary Claude Agent Skills — `kickoff` (day-zero project setup) and `handoff` (living `HANDOFF.md` maintenance) — so long-running projects stay resumable across Claude sessions. End goal: publish them publicly, installable in Claude Code and via claude.ai settings, working on every surface.
+A public GitHub repo holding two complementary Claude Agent Skills — `kickoff` (day-zero project setup) and `handoff` (living `HANDOFF.md` maintenance) — so long-running projects stay resumable across Claude sessions. End goal: publish them publicly, installable in Claude Code and via claude.ai settings, working on every surface. The repo also serves as the ongoing workspace for any further skills.
 
 ## 2. Current state
 
-Both skills are written, validated, unified, and cross-surface. **The repo is now published** — live and public at **https://github.com/arthuroc21/claude_skills** (MIT, default branch `main`), seeded from `claude-skills.zip` and pushed via `gh` from Claude Code. The local clone / repo root is `G:\My Drive\Claude\Discovering Claude\Skills` (a Google-Drive-synced folder — see caveat in §8). The LICENSE copyright holder is now `arthuroc21`, and a project `CLAUDE.md` has been added at the root making "commit + push every skill change" and "keep HANDOFF.md current" standing conventions. This repo is the ongoing workspace for creating/editing/updating skills: every skill added here is committed and pushed to `claude_skills`. Remaining work is optional: installing the `SessionStart` hook (clear + compact) and (re)installing the skills locally.
+Both skills are written, validated, unified, and cross-surface. **The repo is published** — live and public at **https://github.com/arthuroc21/claude-skills** (MIT, default branch `main`). The local clone / repo root is `G:\My Drive\Claude\Discovering Claude\Skills` (a cloud-synced folder — see caveat in §8). The LICENSE copyright holder is `arthuroc21`, and a project `CLAUDE.md` at the root makes "commit + push every skill change", "keep all copies in sync", and "keep HANDOFF.md current" standing conventions. Both skills are installed locally at `~/.claude/skills/{kickoff,handoff}`, kept identical to the repo. A `SessionStart` hook (clear + compact, `shell: bash`) is installed in `~/.claude/settings.json` to re-inject HANDOFF.md after a reset. This repo is the ongoing workspace for creating/editing/updating skills: every skill change here is committed/pushed to `claude-skills` and re-synced to the local install.
 
 ## 3. Map
 
-> Paths below are relative to the repo root (`G:\My Drive\Claude\Discovering Claude\Skills`, published as `arthuroc21/claude_skills`).
+> Paths below are relative to the repo root (`G:\My Drive\Claude\Discovering Claude\Skills`, published as `arthuroc21/claude-skills`).
 
 | Name | Where | What it does |
 |------|-------|--------------|
 | HANDOFF.md | repo root | This living state file (committed; read at session start / after compaction) |
-| CLAUDE.md | repo root | Standing project conventions: commit + push every skill change, keep HANDOFF.md current, public repo |
+| CLAUDE.md | repo root | Standing project conventions: commit + push every change, sync all copies, keep HANDOFF.md current, public repo |
 | README.md | repo root | Repo readme: what the skills do, install steps, optional compaction hook, cross-surface note |
 | LICENSE | repo root | MIT licence; copyright holder `arthuroc21` |
 | .gitignore | repo root | Ignores `*.skill`, `*.zip`, OS/editor cruft |
@@ -25,8 +25,9 @@ Both skills are written, validated, unified, and cross-surface. **The repo is no
 | handoff/assets/HANDOFF_template.md | handoff/assets/ | 8-section state-file skeleton (genericised) |
 | kickoff/SKILL.md | kickoff/ | The kickoff skill (cross-surface; resumes from an existing HANDOFF.md) |
 | kickoff/assets/CLAUDE_md_core.md | kickoff/assets/ | Standing-conventions block for a project CLAUDE.md |
+| local install | `~/.claude/skills/{kickoff,handoff}` | The active Claude Code copy; kept identical to the repo |
 | claude-skills.zip / *.skill | `~/Downloads` (build outputs, gitignored) | The original packaged artifacts the repo was seeded from; superseded by the live repo |
-| SessionStart hook (clear + compact) | user's `~/.claude/settings.json` (not in repo) | Re-injects `HANDOFF.md` into context after `/clear` or compaction; install pending |
+| SessionStart hook (clear + compact) | `~/.claude/settings.json` (not in repo) | Re-injects `HANDOFF.md` into context after `/clear` or compaction; installed (shell=bash) |
 
 ## 4. Conventions and glossary
 
@@ -35,6 +36,8 @@ Both skills are written, validated, unified, and cross-surface. **The repo is no
 - The `HANDOFF.md` format is owned **solely** by the `handoff` skill; `kickoff` defers to it and does not duplicate the template (single source of truth).
 - `kickoff` = day 0 (setup); `handoff` = day 1 onward (maintenance). On a new project both fire — one sets up, the other maintains.
 - Both skills work across **Chat, Cowork, Code, and Design**, adapting per surface; `kickoff`'s GitHub step is direct where a terminal exists and guided (commands handed to the user) where it does not.
+- **Skills are platform-agnostic:** Cowork guidance covers any synced or local folder (Google Drive, OneDrive, Dropbox, local disk), not just Google Drive.
+- **Sync every copy on change:** a skill edited here is committed/pushed to GitHub *and* re-copied to `~/.claude/skills/` so no copy drifts (encoded in `CLAUDE.md`).
 - Australian English, ISO dates (`YYYY-MM-DD`).
 - Skill install paths: `~/.claude/skills/` (global, Code), `<repo>/.claude/skills/` (per-project, committed), or claude.ai Settings upload. Skills do **not** sync across surfaces.
 - `kickoff` creates repos **private by default**; this `claude-skills` repo is public by explicit user choice.
@@ -58,11 +61,16 @@ Both skills are written, validated, unified, and cross-surface. **The repo is no
 - **2026-06-23** — LICENSE copyright holder set to `arthuroc21` (the user's GitHub identity). Why: user choice at kickoff; resolves the prior placeholder.
 - **2026-06-23** — Published the repo **public** from Claude Code via `gh repo create` (not the website flow), seeded from `claude-skills.zip`. Why: a terminal with authenticated `gh` was available, so the direct path applied. Confirmed public visibility before pushing.
 - **2026-06-23** — The repo doubles as the ongoing **workspace** for all future skills, not just the home of `kickoff`/`handoff`. Why: user wants every skill created here committed/pushed to `claude_skills`; encoded in `CLAUDE.md`.
+- **2026-06-23** — Repo **renamed back to `claude-skills`** (hyphen), reversing the `claude_skills` choice two entries above. Why: explicit user instruction; the hyphenated name was the original suggestion and is preferred. Done via `gh repo rename` (GitHub auto-redirects the old URL) + `git remote set-url`. The earlier underscore entries are left as-is (append-only record of what was true at the time).
+- **2026-06-23** — Generalised the skills' Cowork wording from "Google Drive" to any synced/local folder (Google Drive, OneDrive, Dropbox, local disk), and broadened handoff's write-failure note to cover OneDrive Files On-Demand / Dropbox online-only placeholders. Why: the skills must be platform-agnostic, not Google-Drive-specific.
+- **2026-06-23** — Standing convention added: every skill change is propagated to **all** copies — pushed to GitHub *and* re-synced to `~/.claude/skills/`. The two skills were installed there (they had not been in `~/.claude/skills/` before; the session's `anthropic-skills` plugin provided byte-identical copies, but that path is session-scoped). Why: user wants local and remote kept in lockstep.
+- **2026-06-23** — `SessionStart` hook installed in `~/.claude/settings.json` with `shell: "bash"` and matcher `clear|compact`. Why: the user is on Windows but has Git Bash, so a POSIX command with an explicit bash shell is the most reliable; pipe-tested positive (prints HANDOFF.md) and negative (silent when absent) before writing.
 
 ## 6. Change log
 
 *Append only — newest at the top.*
 
+- **2026-06-23** — Renamed the repo to `claude-skills`; generalised both skills' cloud-folder wording (any synced/local platform); installed both skills to `~/.claude/skills/` and added a sync-everywhere convention to `CLAUDE.md`; installed the `SessionStart` handoff-reload hook (clear+compact, shell=bash) in `~/.claude/settings.json`; committed + pushed.
 - **2026-06-23** — **Ran `kickoff` in Claude Code and published the repo.** Seeded the working dir from `claude-skills.zip`, adopted the uploaded `HANDOFF.md` as the root state file, filled the LICENSE holder (`arthuroc21`), added a project `CLAUDE.md`, then `git init` → initial commit → `gh repo create claude_skills --public --push`. Live at https://github.com/arthuroc21/claude_skills (9 files, `main`).
 - **2026-06-23** — Provided detailed steps to install the `SessionStart` hook scoped to `clear` + `compact` in `~/.claude/settings.json`, with JSON-merge and validation guidance.
 - **2026-06-23** — Provided detailed GitHub publishing steps via the website (no CLI): create empty public repo, drag-and-drop the unzipped contents, commit.
@@ -77,9 +85,9 @@ Both skills are written, validated, unified, and cross-surface. **The repo is no
 *Editable — keep current.*
 
 - [x] Fill the LICENSE copyright holder (`arthuroc21`). — done
-- [x] Publish the repo. — done: `gh repo create claude_skills --public --source=. --remote=origin --push` → https://github.com/arthuroc21/claude_skills
-- [ ] (Optional) Install the `SessionStart` hook (clear + compact) in `~/.claude/settings.json`; validate with `python3 -m json.tool` and `/hooks`. (Use the `update-config` skill — it edits settings safely.)
-- [ ] (Optional) Re-install the updated `handoff` and install `kickoff` into `~/.claude/skills/`.
+- [x] Publish the repo. — done → https://github.com/arthuroc21/claude-skills
+- [x] Install the `SessionStart` hook (clear + compact) in `~/.claude/settings.json`. — done (shell=bash); may need `/hooks` opened once or a restart to load in the current session.
+- [x] Install `kickoff` + `handoff` into `~/.claude/skills/`. — done; kept in sync with the repo.
 - [ ] (Optional) Build the `/handoff-out` slash command for the manual "update handoff → ready to compact" flow.
 - [ ] (Optional) Test both skills on a real new project.
 
@@ -88,6 +96,6 @@ Both skills are written, validated, unified, and cross-surface. **The repo is no
 *Editable.*
 
 - ~~LICENSE copyright holder~~ — resolved: `arthuroc21`.
-- ~~Final repo name~~ — resolved: `claude_skills`.
+- ~~Final repo name~~ — resolved: `claude-skills`.
 - Licence choice not final (MIT in place; Apache-2.0 raised as an alternative — low priority now that it's published).
-- **Caveat:** the repo lives in a Google-Drive-synced folder (`G:\My Drive\...`). The Drive client can race on `.git` internals (lock files, packed objects) and occasionally corrupt the local repo. GitHub is the source of truth, so any local corruption is recoverable by re-cloning. Consider excluding this folder from Drive sync, or keeping the working clone in a non-synced local path.
+- **Caveat:** the repo lives in a cloud-synced folder (currently Google Drive, `G:\My Drive\...`; the same risk applies to OneDrive, Dropbox, etc.). The sync client can race on `.git` internals (lock files, packed objects) and occasionally corrupt the local repo. GitHub is the source of truth, so any local corruption is recoverable by re-cloning. Consider excluding this folder from sync, or keeping the working clone on a non-synced local path.

@@ -24,7 +24,7 @@ A *significant change* is: a decision made or reversed; a file created, renamed,
 This skill applies on all four surfaces — Chat, Cowork, Code, and Design. The behaviours above are the same everywhere; only persistence differs, so put the file where it will actually survive on each:
 
 - **Claude Code** — `HANDOFF.md` at the repository root. Edit the real file on each change, and commit it so teammates inherit it. It coexists with `CLAUDE.md`: that file holds standing rules and conventions, this one holds state and history.
-- **Cowork** — `HANDOFF.md` in the project folder (Google Drive or local). If the folder is on Google Drive for Desktop and writes fail, it is likely in streaming mode — the fix is to mark the folder "Available offline".
+- **Cowork** — `HANDOFF.md` in the project folder, wherever it is synced (Google Drive, OneDrive, Dropbox, or local disk). If it sits in a cloud-sync client that streams files on demand (Google Drive for Desktop, OneDrive Files On-Demand, Dropbox online-only) and writes fail, the file is likely an online-only placeholder — mark the file or folder "Available offline" / "Always keep on this device" to fix it.
 - **Chat (claude.ai)** — there is no persistent file between conversations and no background process. Maintain `HANDOFF.md` within the session and hand it back as a file the user can save. To carry it across conversations it must live in a Project as a reference document, or be pasted/uploaded at the start of the next session. A Preferences line can make the *behaviour* default, but the *file* still has to be stored deliberately.
 - **Claude Design** — canvas- and session-oriented, the least file-based surface. Keep the state inline and give the user the file to store elsewhere.
 

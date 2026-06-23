@@ -16,7 +16,7 @@ It is the companion to the `handoff` skill: **kickoff sets the project up; hando
 This runs on all four surfaces — Chat, Cowork, Code, and Design. Steps 1 (questions) and 3 (state files) work everywhere; what changes per surface is **how version control happens and where the files live**:
 
 - **Claude Code** — full flow: `git`/`gh` in a terminal, files in the repo, committed on every change.
-- **Cowork** — files live in the project folder (Google Drive or local). If a terminal with `gh` is available, do the GitHub steps directly; if not, treat it like the no-terminal surfaces below.
+- **Cowork** — files live in the project folder, wherever it is synced (Google Drive, OneDrive, Dropbox, or local disk). If a terminal with `gh` is available, do the GitHub steps directly; if not, treat it like the no-terminal surfaces below.
 - **Chat (claude.ai)** — no terminal, and no persistent filesystem between conversations. Produce the state files as downloadable artifacts (and suggest storing them in a Project so they persist), and do the GitHub part by giving the user the exact commands to run themselves.
 - **Claude Design** — canvas- and session-oriented. Keep state inline and hand the user the files to store and version elsewhere.
 
