@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build one Cowork plugin per skill in this repo, into the sibling
-'Cowork Skills Library' folder, so each skill can be installed individually in Cowork.
+'Skills Library' folder, so each skill can be installed individually in Cowork.
 
 A "skill" is any top-level directory containing a SKILL.md. Each skill becomes its own
 <skill>.plugin (plugin name = skill name, so it shows in Cowork as <skill>:<skill>).
@@ -17,7 +17,7 @@ import zipfile
 from datetime import datetime
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LIBRARY = os.path.normpath(os.path.join(REPO, "..", "Cowork Skills Library"))
+LIBRARY = os.path.normpath(os.path.join(REPO, "..", "Skills Library"))
 
 
 def git(*args, default=""):
@@ -107,7 +107,7 @@ def main():
             print("[build-plugin] removed stale %s" % f)
 
     lines = [
-        "# Cowork Skills Library\n",
+        "# Skills Library\n",
         "Individual, installable Cowork plugins — **one per skill** — rebuilt "
         "automatically from the `claude-skills` repo. Install only the ones you need.\n",
         "| Skill | File | In Cowork |",

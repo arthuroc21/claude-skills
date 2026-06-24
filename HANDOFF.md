@@ -26,8 +26,8 @@ Both skills are written, validated, unified, and cross-surface. **The repo is pu
 | kickoff/SKILL.md | kickoff/ | The kickoff skill (cross-surface; resumes from an existing HANDOFF.md) |
 | kickoff/assets/CLAUDE_md_core.md | kickoff/assets/ | Standing-conventions block for a project CLAUDE.md |
 | local install | `~/.claude/skills/{kickoff,handoff}` | The active Claude Code copy; kept identical to the repo |
-| scripts/build_cowork_plugin.py | scripts/ | Packages **each** repo skill into its own `<skill>.plugin`; writes them + an index README to the sibling `Cowork Skills Library/` (removes stale plugins) |
-| Cowork Skills Library/ | `G:\…\Discovering Claude\Cowork Skills Library` (outside repo, on Drive) | Distribution folder: one `<skill>.plugin` per skill (`kickoff.plugin`, `handoff.plugin`, …) + index README; install individually in Cowork; rebuilt on every skill change |
+| scripts/build_cowork_plugin.py | scripts/ | Packages **each** repo skill into its own `<skill>.plugin`; writes them + an index README to the sibling `Skills Library/` (removes stale plugins) |
+| Skills Library/ | `G:\…\Discovering Claude\Skills Library` (outside repo, on Drive) | Distribution folder: one `<skill>.plugin` per skill (`kickoff.plugin`, `handoff.plugin`, …) + index README; install individually in Cowork; rebuilt on every skill change |
 | claude-skills.zip / *.skill | `~/Downloads` (build outputs, gitignored) | The original packaged artifacts the repo was seeded from; superseded by the live repo |
 | SessionStart hook (clear + compact) | `~/.claude/settings.json` (not in repo) | Re-injects `HANDOFF.md` into context after `/clear` or compaction; installed (shell=bash) |
 
@@ -78,6 +78,7 @@ Both skills are written, validated, unified, and cross-surface. **The repo is pu
 
 *Append only — newest at the top.*
 
+- **2026-06-24** — Renamed the install library folder to `Skills Library` (was `Cowork Skills Library`); repointed `scripts/build_cowork_plugin.py`, `scripts/install-hooks.sh` (and the installed post-commit hook), and the docs at the new path, then regenerated `kickoff.plugin`/`handoff.plugin` there. The build uses a relative path (`../Skills Library`), so it follows the sibling folder.
 - **2026-06-24** — Installed the git `post-commit` hook (user-approved) that auto-rebuilds the per-skill Cowork plugins on every commit, and added `scripts/install-hooks.sh` to (re)install it after cloning (hooks aren't version-controlled). Verified it fires on commit.
 - **2026-06-24** — Switched the Cowork Library from one combined bundle to **one `.plugin` per skill** (`kickoff.plugin`, `handoff.plugin`); rewrote `scripts/build_cowork_plugin.py` accordingly (auto-removes stale plugins) and updated `CLAUDE.md`. Each installs individually in Cowork as `<skill>:<skill>`.
 - **2026-06-24** — Added `scripts/build_cowork_plugin.py` and created the **Cowork Skills Library** at `G:\…\Discovering Claude\Cowork Skills Library` (`claude-skills.plugin` v0.1.x bundling all skills + index README). Documented the rebuild-on-change flow in `CLAUDE.md`. Supersedes the ad-hoc `~/Downloads/claude-skills.plugin`. Git `post-commit` auto-rebuild proposed but not installed (awaiting user consent).
@@ -101,7 +102,7 @@ Both skills are written, validated, unified, and cross-surface. **The repo is pu
 - [x] Publish the repo. — done → https://github.com/arthuroc21/claude-skills
 - [x] Install the `SessionStart` hook (clear + compact) in `~/.claude/settings.json`. — done (shell=bash); may need `/hooks` opened once or a restart to load in the current session.
 - [x] Install `kickoff` + `handoff` into `~/.claude/skills/`. — done; kept in sync with the repo.
-- [ ] In Cowork: install the `<skill>.plugin`(s) you need from `Cowork Skills Library/` (attach in a Cowork chat → Accept). Reinstall to apply later updates.
+- [ ] In Cowork: install the `<skill>.plugin`(s) you need from `Skills Library/` (attach in a Cowork chat → Accept). Reinstall to apply later updates.
 - [x] Git `post-commit` hook installed (auto-rebuilds the per-skill Cowork plugins on every commit; reinstall after cloning via `sh scripts/install-hooks.sh`). — done
 - [ ] (Optional) Build the `/handoff-out` slash command for the manual "update handoff → ready to compact" flow.
 - [ ] (Optional) Test both skills on a real new project.
