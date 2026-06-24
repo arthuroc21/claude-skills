@@ -99,7 +99,8 @@ def build_one(skill, version, built, sha, library):
     with zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr(".claude-plugin/plugin.json", json.dumps(plugin_json, indent=2) + "\n")
         z.writestr("README.md", readme)
-        for root, _dirs, files in os.walk(os.path.join(REPO, skill)):
+        for root, dirs, files in os.walk(os.path.join(REPO, skill)):
+            dirs[:] = [d for d in dirs if not d.startswith(".")]  # skip .claude-plugin/ etc.
             for f in files:
                 full = os.path.join(root, f)
                 rel = os.path.relpath(full, REPO).replace("\\", "/")  # e.g. kickoff/SKILL.md

@@ -1,0 +1,10 @@
+{
+  "name": "kickoff",
+  "description": "Run the day-zero setup when a new project, repository, or build effort begins.",
+  "author": {
+    "name": "arthuroc21"
+  },
+  "homepage": "https://github.com/arthuroc21/claude-skills/tree/main/kickoff",
+  "repository": "https://github.com/arthuroc21/claude-skills",
+  "license": "MIT"
+}

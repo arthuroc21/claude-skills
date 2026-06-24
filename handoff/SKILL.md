@@ -11,6 +11,14 @@ Long projects span many sessions, and context evaporates between them: auto-memo
 
 **The governing principle — the cold-start test.** Write `HANDOFF.md` so that a fresh instance of Claude, with zero memory of the conversation (or a new human teammate), could pick the project back up by reading this one file. If something essential lives only in the conversation, it is not captured yet. Every decision about what to include comes back to this test.
 
+**Capture the delta — the detail the other layers drop.** `HANDOFF.md` is not the only place a project's state is stored; it earns its keep by holding, in detail, what the others cannot. Know what each of the other layers loses, and deliberately cover the gap:
+
+- A **context-compaction summary** is auto-generated and lossy — it keeps the gist and discards the specifics: exact values, commands, IDs, error messages, file/line references, and the granular path that led here.
+- **Auto-memory** holds a handful of durable facts about the user and the project — not the project's full working state, and not reliably.
+- **CLAUDE.md** holds standing rules and conventions — not state, not history, not the detail behind a choice.
+
+So write down, in full, the things none of those will preserve: approaches already tried and *why* they failed (so they are not retried); the reasoning behind a decision, not just the decision; exact reproduction steps, commands, IDs, and values that worked or broke; subtle constraints, edge cases, and gotchas discovered along the way; and anything noticed but not yet acted on. **When a detail lives only in the live conversation, it belongs here — captured in full, not summarised away.** Err on the side of more detail: richer is safer than terser, as long as every line is a real, checkable fact.
+
 ## The three behaviours
 
 1. **At project start** — if `HANDOFF.md` does not already exist, create it from `assets/HANDOFF_template.md`.
@@ -43,13 +51,14 @@ The sections and why each exists:
 - **6. Change log** — append only, newest at the top: date · what changed. The running history.
 - **7. Next steps** — editable; keep current.
 - **8. Open questions / blockers** — editable.
+- **9. Notes & detail** — the *delta* (see *Capture the delta*): granular working knowledge that a compaction summary, auto-memory, and `CLAUDE.md` will not preserve — gotchas, environment quirks, exact commands / IDs / values, approaches tried and why they failed, partial diagnoses, and things noticed but not yet acted on. This is where "detailed" lives; expand it freely.
 
 ## Discipline
 
 These rules are what keep the file trustworthy:
 
 - **Real facts, never placeholders.** If a detail does not exist yet, write `(TBC)` — never invent a plausible-sounding value, and strip every `[bracketed]` prompt from the template once filled. A handoff full of fiction is worse than no handoff.
-- **Concise and factual.** It is a working document, not a narrative.
+- **Detailed, but factual.** Capture as much real detail as the cold-start test and the *delta* need — err toward including specifics that live only in the conversation. It is a working reference, not a narrative: dense with facts, free of padding and restatement. More true detail is good; vague or invented detail is not.
 - **Sections 5 and 6 only grow.** They are the historical record — append, do not edit or delete.
 - **Do not reopen logged decisions** unless the user asks.
 - **Current instruction wins.** If what the user says now conflicts with the file, the new instruction takes precedence — follow it and update the file to match.

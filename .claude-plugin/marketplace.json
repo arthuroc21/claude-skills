@@ -1,0 +1,23 @@
+{
+  "name": "claude-skills",
+  "owner": {
+    "name": "arthuroc21"
+  },
+  "description": "Public marketplace of Claude Agent Skills for project setup and cross-session continuity.",
+  "plugins": [
+    {
+      "name": "handoff",
+      "source": "./handoff",
+      "description": "Maintain a living HANDOFF.md that captures a project's full state — summary, current status, file map, decision log, change log, next steps, and blockers — so a fresh Claude instance with no prior memory (or a new human teammate) can resume the work by reading that one file.",
+      "category": "productivity",
+      "license": "MIT"
+    },
+    {
+      "name": "kickoff",
+      "source": "./kickoff",
+      "description": "Run the day-zero setup when a new project, repository, or build effort begins.",
+      "category": "productivity",
+      "license": "MIT"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: kickoff
-description: Run the day-zero setup when a new project, repository, or build effort begins. Use this skill whenever the user starts something new — "let's build X", "I'm starting a new project", "new repo", "set up a project", "kick off", "let's get started on…" — or opens a fresh codebase with no scaffolding yet. It does three things, in order — (1) asks a short set of high-leverage questions — including a name for the new effort — about what is being built and its constraints; (2) sets up GitHub — links an existing repo or creates a new private one, then commits and pushes on every significant change; (3) initialises HANDOFF.md and a project CLAUDE.md so the project has durable state and standing conventions from the start. Defers to the handoff skill for the HANDOFF.md structure and its ongoing maintenance — it does not duplicate that format. Works across Chat, Cowork, Code, and Design, adapting per surface — doing the GitHub setup directly where a terminal exists, and guiding the user through it where it does not.
+description: Run the day-zero setup when a new project, repository, or build effort begins. Use this skill whenever the user starts something new — "let's build X", "I'm starting a new project", "new repo", "set up a project", "kick off", "let's get started on…" — or opens a fresh codebase with no scaffolding yet. It interviews for a few high-leverage details (including a name for the effort), sets up GitHub (linking an existing repo or creating a new private one, and committing on every change), and initialises HANDOFF.md plus a project CLAUDE.md — deferring the HANDOFF.md format to the handoff skill. Works across Chat, Cowork, Code, and Design, adapting per surface.
 ---
 
 # Kickoff
@@ -18,7 +18,7 @@ It is the companion to the `handoff` skill: **kickoff sets the project up; hando
 This runs on all four surfaces — Chat, Cowork, Code, and Design. Steps 1 (questions) and 3 (state files) work everywhere; what changes per surface is **how version control happens and where the files live**:
 
 - **Claude Code** — full flow: `git`/`gh` in a terminal, files in the repo, committed on every change.
-- **Cowork** — files live in the project folder, wherever it is synced (Google Drive, OneDrive, Dropbox, or local disk). If a terminal with `gh` is available, do the GitHub steps directly; if not, treat it like the no-terminal surfaces below.
+- **Cowork** — files live in the project folder, wherever it is synced (Google Drive, OneDrive, Dropbox, or local disk). One Cowork project often hosts several efforts, so first settle *which* folder this effort uses — a new named subfolder for this chat, an existing subfolder, or the project's main folder (see Step 1) — and create the state files there. If a terminal with `gh` is available, do the GitHub steps directly; if not, treat it like the no-terminal surfaces below.
 - **Chat (claude.ai)** — no terminal, and no persistent filesystem between conversations. Produce the state files as downloadable artifacts (and suggest storing them in a Project so they persist), and do the GitHub part by giving the user the exact commands to run themselves.
 - **Claude Design** — canvas- and session-oriented. Keep state inline and hand the user the files to store and version elsewhere.
 
@@ -30,6 +30,7 @@ Open with a short, high-leverage set of questions — not a questionnaire. This 
 - **What we're building and the end goal** — the North Star.
 - **Stack / platform / language**, and where it will run or deploy.
 - **Existing materials to build on** — any files, designs, docs, or code already in the project (or elsewhere) that this new effort should start from or reuse. Especially relevant when kickoff runs inside a workspace that already has content.
+- **(Cowork only) Which folder this effort uses** — when running inside a Cowork project, ask where this effort's files should live: **(a)** a **new subfolder** for this chat, with a name the user chooses, created inside the project folder; **(b)** an **existing subfolder** to connect to and continue in; or **(c)** the project's **main folder**, as-is. This sets where `HANDOFF.md`, `CLAUDE.md`, and everything else for the effort are created. Lean toward a new named subfolder when the project folder already holds other work, so each effort stays self-contained — and create the folder once the user picks the name.
 - **Whether a GitHub repo already exists** — this drives Step 2.
 - **Whether they already have a HANDOFF.md to start from** — this drives Step 3.
 - **Hard constraints** — deadline, required tools or services, things to avoid.
@@ -51,7 +52,7 @@ Add a sensible `.gitignore` for the stack before the first commit (dependencies,
 
 ## Step 3 — Initialise project state
 
-Create two files at the project root (the repo root in Code; the project folder in Cowork; downloadable/Project files in Chat; handed to the user in Design):
+Create two files at the project root (the repo root in Code; in Cowork, the effort folder chosen in Step 1 — a new subfolder, an existing one, or the project's main folder; downloadable/Project files in Chat; handed to the user in Design):
 
 1. **HANDOFF.md** — the project's living state file. Based on the Step 1 answer about an existing HANDOFF.md:
    - **If they already have one** → wait for them to provide it (upload it, or point to its path), adopt it as the project's state file, and resume from its current state instead of starting blank. Read it, confirm where things stand in 2–3 lines, and let the `handoff` skill take over ongoing updates.

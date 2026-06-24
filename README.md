@@ -15,21 +15,36 @@ The guiding idea behind both is the **cold-start test**: write things down so th
 
 ```
 .
+├── .claude-plugin/
+│   └── marketplace.json            # makes this repo an installable Claude Code plugin marketplace
 ├── handoff/
+│   ├── .claude-plugin/plugin.json  # plugin manifest (for marketplace install)
 │   ├── SKILL.md
 │   └── assets/
-│       └── HANDOFF_template.md      # the 8-section state-file skeleton
-└── kickoff/
-    ├── SKILL.md
-    └── assets/
-        └── CLAUDE_md_core.md        # standing-conventions block for a project's CLAUDE.md
+│       └── HANDOFF_template.md      # the 9-section state-file skeleton
+├── kickoff/
+│   ├── .claude-plugin/plugin.json
+│   ├── SKILL.md
+│   └── assets/
+│       └── CLAUDE_md_core.md        # standing-conventions block for a project's CLAUDE.md
+└── scripts/                         # build_marketplace.py · build_cowork_plugin.py · install-hooks.sh
 ```
 
 ## Install
 
 ### Claude Code
 
-Drop the skill folders into a skills directory — Claude Code discovers them automatically.
+**Via the plugin marketplace (recommended).** This repo *is* a Claude Code plugin marketplace — add it once, then install either skill by name:
+
+```text
+/plugin marketplace add arthuroc21/claude-skills
+/plugin install kickoff@claude-skills
+/plugin install handoff@claude-skills
+```
+
+Marketplace-installed skills are namespaced (`kickoff:kickoff`, `handoff:handoff`) and participate in auto-trigger exactly like local skills. Pull later updates with `/plugin marketplace update claude-skills`.
+
+**Or copy the folders manually.** Drop the skill folders into a skills directory — Claude Code discovers them automatically:
 
 ```bash
 # Global — available in every project

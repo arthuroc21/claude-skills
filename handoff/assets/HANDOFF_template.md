@@ -45,3 +45,9 @@ Files, repos, datasets, connectors, and APIs that matter.
 *Editable.*
 
 - [Question or blocker, with any context needed to act on it.]
+
+## 9. Notes & detail
+
+*The "delta" — granular working knowledge that a context-compaction summary, auto-memory, and CLAUDE.md will not preserve. Capture it here, in full: gotchas and environment quirks; exact commands, IDs, paths, and values that worked or broke; approaches already tried and why they failed; partial diagnoses and half-finished trails of thought; and anything noticed but not yet acted on. When a detail lives only in the conversation, it belongs here. Expand freely — this is where "detailed" lives.*
+
+- [Detail, gotcha, exact command/value, or thing-noticed — anything a returning reader would otherwise have to rediscover.]

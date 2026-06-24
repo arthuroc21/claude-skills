@@ -1,0 +1,10 @@
+{
+  "name": "handoff",
+  "description": "Maintain a living HANDOFF.md that captures a project's full state — summary, current status, file map, decision log, change log, next steps, and blockers — so a fresh Claude instance with no prior memory (or a new human teammate) can resume the work by reading that one file.",
+  "author": {
+    "name": "arthuroc21"
+  },
+  "homepage": "https://github.com/arthuroc21/claude-skills/tree/main/handoff",
+  "repository": "https://github.com/arthuroc21/claude-skills",
+  "license": "MIT"
+}
