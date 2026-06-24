@@ -8,11 +8,11 @@ A public GitHub repo holding two complementary Claude Agent Skills — `kickoff`
 
 ## 2. Current state
 
-Both skills are written, validated, unified, and cross-surface. **The repo is published** — live and public at **https://github.com/arthuroc21/claude-skills** (MIT, default branch `main`). The local clone / repo root is `G:\My Drive\Claude\Discovering Claude\Skills` (a cloud-synced folder — see caveat in §8). The LICENSE copyright holder is `arthuroc21`, and a project `CLAUDE.md` at the root makes "commit + push every skill change", "keep all copies in sync", and "keep HANDOFF.md current" standing conventions. Both skills are installed locally at `~/.claude/skills/{kickoff,handoff}`, kept identical to the repo. A `SessionStart` hook (clear + compact, `shell: bash`) is installed in `~/.claude/settings.json` to re-inject HANDOFF.md after a reset. This repo is the ongoing workspace for creating/editing/updating skills: every skill change here is committed/pushed to `claude-skills` and re-synced to the local install.
+Both skills are written, validated, unified, and cross-surface. **The repo is published** — live and public at **https://github.com/arthuroc21/claude-skills** (MIT, default branch `main`). The local clone / repo root is `G:\My Drive\Claude\Discovering Claude\Creating Skills` (a cloud-synced folder — see caveat in §8). The LICENSE copyright holder is `arthuroc21`, and a project `CLAUDE.md` at the root makes "commit + push every skill change", "keep all copies in sync", and "keep HANDOFF.md current" standing conventions. Both skills are installed locally at `~/.claude/skills/{kickoff,handoff}`, kept identical to the repo. A `SessionStart` hook (clear + compact, `shell: bash`) is installed in `~/.claude/settings.json` to re-inject HANDOFF.md after a reset. This repo is the ongoing workspace for creating/editing/updating skills: every skill change here is committed/pushed to `claude-skills` and re-synced to the local install.
 
 ## 3. Map
 
-> Paths below are relative to the repo root (`G:\My Drive\Claude\Discovering Claude\Skills`, published as `arthuroc21/claude-skills`).
+> Paths below are relative to the repo root (`G:\My Drive\Claude\Discovering Claude\Creating Skills`, published as `arthuroc21/claude-skills`).
 
 | Name | Where | What it does |
 |------|-------|--------------|
@@ -78,6 +78,7 @@ Both skills are written, validated, unified, and cross-surface. **The repo is pu
 
 *Append only — newest at the top.*
 
+- **2026-06-24** — Prepped the local project-folder rename `Skills` → `Creating Skills` (naming consistency with the chat): updated the repo-root path refs in `HANDOFF.md` and copied the project auto-memory to the new path key (`…-Creating-Skills`). Only the local folder name changes — the GitHub repo stays `claude-skills`, and the build's relative `../Skills Library` path is unaffected. The folder rename itself is a user action (close Claude → F2 in Explorer → reopen + reconnect).
 - **2026-06-24** — Renamed the install library folder to `Skills Library` (was `Cowork Skills Library`); repointed `scripts/build_cowork_plugin.py`, `scripts/install-hooks.sh` (and the installed post-commit hook), and the docs at the new path, then regenerated `kickoff.plugin`/`handoff.plugin` there. The build uses a relative path (`../Skills Library`), so it follows the sibling folder.
 - **2026-06-24** — Installed the git `post-commit` hook (user-approved) that auto-rebuilds the per-skill Cowork plugins on every commit, and added `scripts/install-hooks.sh` to (re)install it after cloning (hooks aren't version-controlled). Verified it fires on commit.
 - **2026-06-24** — Switched the Cowork Library from one combined bundle to **one `.plugin` per skill** (`kickoff.plugin`, `handoff.plugin`); rewrote `scripts/build_cowork_plugin.py` accordingly (auto-removes stale plugins) and updated `CLAUDE.md`. Each installs individually in Cowork as `<skill>:<skill>`.
@@ -102,6 +103,7 @@ Both skills are written, validated, unified, and cross-surface. **The repo is pu
 - [x] Publish the repo. — done → https://github.com/arthuroc21/claude-skills
 - [x] Install the `SessionStart` hook (clear + compact) in `~/.claude/settings.json`. — done (shell=bash); may need `/hooks` opened once or a restart to load in the current session.
 - [x] Install `kickoff` + `handoff` into `~/.claude/skills/`. — done; kept in sync with the repo.
+- [ ] Rename the local folder `Skills` → `Creating Skills` (close Claude, F2 in Explorer, reopen + connect the renamed folder). Docs + project memory already point at the new name.
 - [ ] In Cowork: install the `<skill>.plugin`(s) you need from `Skills Library/` (attach in a Cowork chat → Accept). Reinstall to apply later updates.
 - [x] Git `post-commit` hook installed (auto-rebuilds the per-skill Cowork plugins on every commit; reinstall after cloning via `sh scripts/install-hooks.sh`). — done
 - [ ] (Optional) Build the `/handoff-out` slash command for the manual "update handoff → ready to compact" flow.
