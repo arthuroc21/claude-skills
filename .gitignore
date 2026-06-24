@@ -1,6 +1,7 @@
 # Packaged skill artifacts (build outputs, not source)
 *.skill
 *.zip
+*.plugin
 
 # OS / editor cruft
 .DS_Store
